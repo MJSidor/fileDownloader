@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="@string/buttonGetFileText"
@@ -95,10 +95,23 @@
         android:id="@+id/textViewDownloadedLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:text="@string/textViewDownloadedLabelText"
         app:layout_constraintStart_toStartOf="@+id/textViewFileTypeLabel"
         app:layout_constraintTop_toBottomOf="@+id/buttonGetFile" />
+
+    <TextView
+        android:id="@+id/textViewDownloadPercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDownloadedLabel" />
 
     <TextView
         android:id="@+id/textViewDownloaderValue"
@@ -108,4 +121,21 @@
         android:layout_marginRight="64dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewDownloadedLabel"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/determinateBar"
+        style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+        android:layout_width="290dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:progress="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDownloadPercentage" />
+
 </android.support.constraint.ConstraintLayout>

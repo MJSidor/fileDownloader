@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,10 +32,21 @@ public class MainActivity extends AppCompatActivity {
             String downloaded = Integer.toString(progress.bytesDownloaded);
             String size = Integer.toString(progress.size);
             int finished = progress.finished;
+            ProgressBar progressBar = findViewById(R.id.determinateBar);
+            TextView percentage = findViewById(R.id.textViewDownloadPercentage);
+            float percent;
 
-            downloadProgress.setText(downloaded+"/"+size);
-            if (finished == 1) Toast.makeText(getApplicationContext(),"Download finished",Toast.LENGTH_SHORT);
+            if (finished == 0) {
+                percent = 100.0f * progress.bytesDownloaded / progress.size;
+                progressBar.setProgress((int) percent);
+                percentage.setText(String.format("%.1f",percent ) + "%");
+            }
 
+            downloadProgress.setText(downloaded + "/" + size);
+            if (finished == 1) {
+                Toast.makeText(getApplicationContext(), "Download finished", Toast.LENGTH_SHORT).show();
+                percentage.setText("100%");
+            }
         }
     };
 
@@ -73,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 TextView url = findViewById(R.id.editTextURL);
                 www = url.getText().toString();
                 FileDownloader.runService(MainActivity.this, www);
-
+                Toast.makeText(getApplicationContext(), "Downloading...", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -85,7 +85,7 @@ public class FileDownloader extends IntentService {
 
             DataInputStream reader = new DataInputStream(connection.getInputStream());
             outStream = new FileOutputStream(outFile.getPath());
-            int BLOCK_SIZE = 1536;
+            int BLOCK_SIZE = 1024*1024*5;
             byte buffer[] = new byte[BLOCK_SIZE];
 
             progress.size = connection.getContentLength();
@@ -103,6 +103,7 @@ public class FileDownloader extends IntentService {
             }
 
             progress.finished=1;
+            transmitBroadcast(progress);
             Log.d("downloaded file: " + outFile.getPath() + outFile.getName(), ": " + Integer.toString(bytesDownloaded) + " bytes");
 
         } catch (Exception e) {
