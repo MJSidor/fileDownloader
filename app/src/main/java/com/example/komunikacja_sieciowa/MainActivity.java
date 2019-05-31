@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
 
     private String www;
@@ -39,6 +41,16 @@ public class MainActivity extends AppCompatActivity {
                 www = url.getText().toString();
                 GetFileInfo fileInfo = new GetFileInfo(MainActivity.this);
                 fileInfo.execute(new String[] {www});
+
+            }
+        });
+
+        Button buttonDownload = findViewById(R.id.buttonGetFile);
+        buttonDownload.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                TextView url = findViewById(R.id.editTextURL);
+                www = url.getText().toString();
+                FileDownloader.runService(MainActivity.this,www);
 
             }
         });
