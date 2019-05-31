@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textViewURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/textViewURLText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonGetInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/buttonGetInfoText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewURL" />
+
+    <TextView
+        android:id="@+id/textViewFileSizeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/textViewFileSizeLabelText"
+        app:layout_constraintStart_toStartOf="@+id/textViewURL"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGetInfo" />
+
+    <TextView
+        android:id="@+id/textViewFileSizeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewFileSizeLabel"
+        app:layout_constraintEnd_toEndOf="@+id/editTextURL" />
+
+    <TextView
+        android:id="@+id/textViewFileTypeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/textViewFileTypeLabelText"
+        app:layout_constraintStart_toStartOf="@+id/textViewFileSizeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFileSizeLabel" />
+
+    <TextView
+        android:id="@+id/textViewFileTypeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewFileTypeLabel"
+        app:layout_constraintStart_toStartOf="@+id/textViewFileSizeValue" />
+
+    <Button
+        android:id="@+id/buttonGetFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/buttonGetFileText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFileTypeValue" />
+
+    <TextView
+        android:id="@+id/textViewDownloadedLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/textViewDownloadedLabelText"
+        app:layout_constraintStart_toStartOf="@+id/textViewFileTypeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGetFile" />
+
+    <TextView
+        android:id="@+id/textViewDownloaderValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewDownloadedLabel"
+        app:layout_constraintStart_toStartOf="@+id/textViewFileTypeValue" />
+</android.support.constraint.ConstraintLayout>

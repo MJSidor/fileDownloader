@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">komunikacja_sieciowa</string>
+    <string name="textViewURLText">URL</string>
+    <string name="editTextURLText">URL of the file</string>
+    <string name="buttonGetInfoTetx">Get file info</string>
+    <string name="buttonGetInfoText">Get file info</string>
+    <string name="textViewFileSizeLabelText">File size</string>
+    <string name="textViewFileTypeLabelText">File type</string>
+    <string name="buttonGetFileText">Download</string>
+    <string name="textViewDownloadedLabelText">Downloaded</string>
+</resources>
