@@ -60,9 +60,7 @@ public class GetFileInfo extends AsyncTask<String, String, String> {
 
             this.mainActivity.setFileSizeLabel(Integer.toString(fileSize));
             this.mainActivity.setFileTypeLabel(fileType);
-        }
-        else
-        {
+        } else {
             this.mainActivity.setFileSizeLabel("Could not access\nspecified file");
             this.mainActivity.setFileTypeLabel("Could not access\nspecified file");
         }

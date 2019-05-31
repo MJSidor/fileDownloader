@@ -56,8 +56,10 @@
         android:id="@+id/textViewFileSizeValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewFileSizeLabel"
-        app:layout_constraintEnd_toEndOf="@+id/editTextURL" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textViewFileTypeLabel"
@@ -102,6 +104,8 @@
         android:id="@+id/textViewDownloaderValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewDownloadedLabel"
-        app:layout_constraintStart_toStartOf="@+id/textViewFileTypeValue" />
+        app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>

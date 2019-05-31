@@ -17,7 +17,10 @@ import java.net.URL;
 public class FileDownloader extends IntentService {
 
     private int bytesDownloaded;
+    public final static String RECEIVER = "com.example.intent_service.receiver";
+    public final static String INFO = "info";
 
+    private DownloadProgress progress;
     private static final String ACTION_DOWNLOAD = "com.example.intent_service.action.download";
     private static final String PARAMETER1 =
             "com.example.intent_service.extra.url";
@@ -64,6 +67,7 @@ public class FileDownloader extends IntentService {
         FileOutputStream outStream = null;
         HttpURLConnection connection = null;
         InputStream inStream = null;
+        progress = new DownloadProgress();
 
         bytesDownloaded = 0;
         try {
@@ -81,15 +85,24 @@ public class FileDownloader extends IntentService {
 
             DataInputStream reader = new DataInputStream(connection.getInputStream());
             outStream = new FileOutputStream(outFile.getPath());
-            int BLOCK_SIZE = 128;
+            int BLOCK_SIZE = 1536;
             byte buffer[] = new byte[BLOCK_SIZE];
+
+            progress.size = connection.getContentLength();
+            progress.finished=0;
+
             int downloaded = reader.read(buffer, 0, BLOCK_SIZE);
             while (downloaded != -1) {
                 outStream.write(buffer, 0, downloaded);
                 bytesDownloaded += downloaded;
+                progress.bytesDownloaded=bytesDownloaded;
+                transmitBroadcast(progress);
+
                 downloaded = reader.read(buffer, 0, BLOCK_SIZE);
                 Log.d("downloading file:" + outFile.getName(), ": " + Integer.toString(downloaded) + " bytes");
             }
+
+            progress.finished=1;
             Log.d("downloaded file: " + outFile.getPath() + outFile.getName(), ": " + Integer.toString(bytesDownloaded) + " bytes");
 
         } catch (Exception e) {
@@ -111,6 +124,12 @@ public class FileDownloader extends IntentService {
             if (connection != null) connection.disconnect();
         }
 
+    }
+
+    public void transmitBroadcast(DownloadProgress progress) {
+        Intent intent = new Intent(RECEIVER);
+        intent.putExtra(INFO, progress);
+        sendBroadcast(intent);
     }
 
 }
