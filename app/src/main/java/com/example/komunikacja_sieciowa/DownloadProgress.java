@@ -1,3 +1,8 @@
+/**
+ * Klasa służąca do przechowywania danych nt. pobieranego pliku -
+ * rozmiar całkowity, rozmiar pobrany, status. Implementuje interfejs Parcelable
+ */
+
 package com.example.komunikacja_sieciowa;
 
 import android.os.Parcel;
@@ -15,6 +20,10 @@ public class DownloadProgress implements Parcelable {
         finished = 0;
     }
 
+    /**
+     * Metoda wczytująca dane do swojej instancji z obiektu Parcelable podanego w argumencie
+     * @param in
+     */
     protected DownloadProgress(Parcel in) {
         bytesDownloaded = in.readInt();
         size = in.readInt();
@@ -38,6 +47,11 @@ public class DownloadProgress implements Parcelable {
         return 0;
     }
 
+    /**
+     * Metoda zapisująca ze swojej instancji dane do podanego w argumencie obiektu Parcelable
+     * @param dest
+     * @param flags
+     */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
