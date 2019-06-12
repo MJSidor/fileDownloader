@@ -1,8 +1,10 @@
 package com.example.komunikacja_sieciowa;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.app.ActivityCompat;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
             Bundle bundle = intent.getExtras();
             DownloadProgress progress = bundle.getParcelable(FileDownloader.INFO);
-            
+
             TextView downloadProgressLabel = findViewById(R.id.textViewDownloaderValue);
             String downloaded = Integer.toString(progress.bytesDownloaded);
             String size = Integer.toString(progress.size);
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 percent = 100.0f * progress.bytesDownloaded / progress.size;
                 // oblicz procent ukończenia pobierania i zaktualizuj pasek postępu oraz etykietę z wartością wyświetlaną tekstowo
                 progressBar.setProgress((int) percent);
-                percentageLabel.setText(String.format("%.1f",percent ) + "%");
+                percentageLabel.setText(String.format("%.1f", percent) + "%");
             }
 
             downloadProgressLabel.setText(downloaded + "/" + size); // zaktualizuj etykietę wyświetlającą ilość pobranych danych i rozmiar
@@ -93,10 +95,28 @@ public class MainActivity extends AppCompatActivity {
         Button buttonDownload = findViewById(R.id.buttonGetFile);
         buttonDownload.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                TextView url = findViewById(R.id.editTextURL);
-                www = url.getText().toString();
-                FileDownloader.runService(MainActivity.this, www);
-                Toast.makeText(getApplicationContext(), "Downloading...", Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+                builder.setMessage("Downloading the file...");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        TextView url = findViewById(R.id.editTextURL);
+                        www = url.getText().toString();
+                        FileDownloader.runService(MainActivity.this, www);
+                        Toast.makeText(getApplicationContext(), "Downloading...", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Toast.makeText(getApplicationContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+
             }
         });
 
@@ -104,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Metoda służąca do ustawiania tekstu w etykiecie przechowującej rozmiar pliku
+     *
      * @param value
      */
     public void setFileSizeLabel(String value) {
@@ -113,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Metoda służąca do ustawiania tekstu w etykiecie przechowującej typ pliku
+     *
      * @param value
      */
     public void setFileTypeLabel(String value) {

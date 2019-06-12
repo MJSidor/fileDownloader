@@ -4,8 +4,10 @@
 
 package com.example.komunikacja_sieciowa;
 
+import android.app.AlertDialog;
 import android.app.IntentService;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Environment;
 import android.util.Log;
@@ -45,6 +47,7 @@ public class FileDownloader extends IntentService {
 
     /**
      * Metoda służąca do uruchamiania usługi.
+     *
      * @param context
      * @param parameter
      */
@@ -59,6 +62,7 @@ public class FileDownloader extends IntentService {
      * Metoda obsługująca otrzymany intent - jeżeli jest on poprawny
      * (niepusty i zawiera właściwość action odpowiednią intentom tworzonym przez metodę runService) -
      * wywoływana jest metoda execute
+     *
      * @param intent
      */
     @Override
@@ -79,6 +83,7 @@ public class FileDownloader extends IntentService {
 
     /**
      * Metoda wykonująca pobieranie pliku z serwera
+     *
      * @param strUrl
      */
     private void execute(String strUrl) {
@@ -102,16 +107,18 @@ public class FileDownloader extends IntentService {
                             + File.separator + tempFile.getName());
             if (outFile.exists()) outFile.delete();
 
+
+
             // utwórz czytnik danych z połączenia http
             DataInputStream reader = new DataInputStream(connection.getInputStream());
             // utwórz strumień zapisu odczytywanych danych do utworzonego wcześniej pliku
             outStream = new FileOutputStream(outFile.getPath());
             // rozmiar bloku pobieranych danych
-            int BLOCK_SIZE = 1024*1024*5;
+            int BLOCK_SIZE = 1024 * 1024 * 5;
             byte buffer[] = new byte[BLOCK_SIZE];
 
             progress.size = connection.getContentLength();
-            progress.finished=0;
+            progress.finished = 0;
 
             int downloaded = reader.read(buffer, 0, BLOCK_SIZE);
 
@@ -120,7 +127,7 @@ public class FileDownloader extends IntentService {
                 // zapisz pobrany blok danych do pliku
                 outStream.write(buffer, 0, downloaded);
                 bytesDownloaded += downloaded;
-                progress.bytesDownloaded=bytesDownloaded;
+                progress.bytesDownloaded = bytesDownloaded;
                 // wyślij transmisję z danymi nt. pobierania
                 transmitBroadcast(progress);
 
@@ -129,7 +136,7 @@ public class FileDownloader extends IntentService {
                 Log.d("downloading file:" + outFile.getName(), ": " + Integer.toString(downloaded) + " bytes");
             }
 
-            progress.finished=1;
+            progress.finished = 1;
             transmitBroadcast(progress);
             Log.d("downloaded file: " + outFile.getPath() + outFile.getName(), ": " + Integer.toString(bytesDownloaded) + " bytes");
 
@@ -158,6 +165,7 @@ public class FileDownloader extends IntentService {
 
     /**
      * Metoda służąca do przesyłania (transmitowania) danych nt. pobierania zawartych w obiekcie klasy DownloadProgress
+     *
      * @param progress
      */
     public void transmitBroadcast(DownloadProgress progress) {
